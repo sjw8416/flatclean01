@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://YOUR-DOMAIN.com/index.html</loc><priority>1.0</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/about.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/pricing.html</loc><priority>0.9</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/calculator.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/office.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/cafe.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/hospital.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/academy.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/restaurant.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/fitness.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/unmanned.html</loc><priority>0.8</priority></url>
+  <url><loc>https://YOUR-DOMAIN.com/blog.html</loc><priority>0.6</priority></url>
+</urlset>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>화면 미리보기 | 플랫클린 (내부용)</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --navy:#0F2540;--blue:#2F6FED;--blue-dark:#1E52C4;--blue-tint:#EAF1FF;
+    --border:#E4E8EF;--muted:#5B6472;--bg-soft:#F5F8FC;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,sans-serif;
+    background:#eef1f6;color:var(--navy);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;padding:24px 16px 48px;
+  }
+  h1{font-size:20px;margin:0 0 6px;}
+  .sub{font-size:13px;color:var(--muted);margin:0 0 20px;text-align:center;line-height:1.6;}
+
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;
+    background:#fff;border:1px solid var(--border);border-radius:999px;
+    padding:8px;margin-bottom:8px;box-shadow:0 10px 24px -16px rgba(16,35,64,.4);
+  }
+  .toolbar button{
+    border:none;background:transparent;cursor:pointer;font-family:inherit;
+    font-size:13px;font-weight:700;color:var(--muted);
+    padding:9px 18px;border-radius:999px;transition:background .15s ease,color .15s ease;
+  }
+  .toolbar button:hover{background:var(--bg-soft);color:var(--navy);}
+  .toolbar button.active{background:var(--blue);color:#fff;}
+
+  .page-select{
+    display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px;
+  }
+  .page-select button{
+    border:1px solid var(--border);background:#fff;cursor:pointer;font-family:inherit;
+    font-size:12px;font-weight:600;color:var(--muted);
+    padding:7px 14px;border-radius:999px;
+  }
+  .page-select button:hover{border-color:var(--blue);color:var(--blue);}
+  .page-select button.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+
+  .size-label{font-size:12px;color:var(--muted);margin-bottom:12px;font-weight:600;}
+
+  .frame-wrap{
+    background:#fff;border-radius:20px;padding:10px;
+    box-shadow:0 30px 60px -24px rgba(16,35,64,.45);
+    transition:width .3s ease;
+    width:100%;max-width:100%;
+  }
+  iframe{
+    width:100%;height:78vh;min-height:560px;border:none;border-radius:12px;
+    background:#fff;display:block;
+  }
+
+  .tip{
+    margin-top:24px;max-width:620px;background:#fff;border:1px solid var(--border);
+    border-radius:14px;padding:18px 22px;font-size:13px;line-height:1.75;color:var(--muted);
+  }
+  .tip strong{color:var(--navy);}
+  .tip code{
+    background:var(--bg-soft);border:1px solid var(--border);border-radius:5px;
+    padding:1px 6px;font-size:12px;color:var(--blue-dark);
+  }
+</style>
+</head>
+<body>
+
+<h1>화면 미리보기</h1>
+<p class="sub">기기 크기를 눌러 모바일 · 태블릿 · PC 화면을 바로 확인할 수 있어요.<br>이 페이지는 내부 확인용이라 고객에게는 노출되지 않습니다.</p>
+
+<div class="toolbar">
+  <button data-w="390" class="active">📱 모바일 (390px)</button>
+  <button data-w="430">📱 큰 모바일 (430px)</button>
+  <button data-w="820">📲 태블릿 (820px)</button>
+  <button data-w="1280">💻 PC (1280px)</button>
+</div>
+
+<div class="page-select">
+  <button data-page="index.html" class="active">홈</button>
+  <button data-page="about.html">회사소개</button>
+  <button data-page="pricing.html">가격안내</button>
+  <button data-page="calculator.html">견적계산기</button>
+  <button data-page="office.html">사무실</button>
+  <button data-page="cafe.html">카페·상가</button>
+  <button data-page="hospital.html">병원</button>
+  <button data-page="academy.html">학원</button>
+  <button data-page="restaurant.html">음식점</button>
+  <button data-page="fitness.html">운동시설</button>
+  <button data-page="unmanned.html">무인시설</button>
+  <button data-page="blog.html">청소정보</button>
+</div>
+
+<div class="size-label" id="sizeLabel">현재: 모바일 390px</div>
+
+<div class="frame-wrap" id="frameWrap" style="width:390px;">
+  <iframe id="previewFrame" src="index.html" title="미리보기"></iframe>
+</div>
+
+<div class="tip">
+  <strong>💡 더 정확하게 보고 싶다면</strong><br>
+  브라우저에서 <code>F12</code>(Mac은 <code>Cmd+Option+I</code>)를 누른 뒤,
+  좌측 상단의 <strong>휴대폰 모양 아이콘</strong>을 클릭하면 실제 기기와 거의 동일한 환경으로 확인할 수 있어요.
+  터치 동작이나 실제 기기 해상도까지 테스트할 수 있습니다.
+</div>
+
+<script>
+  const frameWrap = document.getElementById('frameWrap');
+  const previewFrame = document.getElementById('previewFrame');
+  const sizeLabel = document.getElementById('sizeLabel');
+  const sizeBtns = document.querySelectorAll('.toolbar button');
+  const pageBtns = document.querySelectorAll('.page-select button');
+
+  sizeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const w = btn.dataset.w;
+      frameWrap.style.width = w + 'px';
+      sizeLabel.textContent = '현재: ' + btn.textContent.replace(/[📱📲💻]\s*/, '');
+    });
+  });
+
+  pageBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pageBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      previewFrame.src = btn.dataset.page;
+    });
+  });
+</script>
+
+</body>
+</html>
